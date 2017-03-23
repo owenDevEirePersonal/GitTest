@@ -19,13 +19,18 @@ public class Main {
         System.out.println("Loading...");
         TeamMember jim = new TeamMember("Jim Whatshisname", 1);
         jim.setHeartrate(TeamMember.HEARTRATE_SUPERHIGH);
+        jim.setSoundLevel(TeamMember.SOUNDLEVEL_HIGH);
         TeamMember joe = new TeamMember("Joe PleaseDon'tDieHere", 2);
         joe.setHeartrate(TeamMember.HEARTRATE_NONE);
+        joe.setSoundLevel(TeamMember.SOUNDLEVEL_MAX);
         TeamMember josh = new TeamMember("Josh Whatshisname", 3);
         josh.setHeartrate(TeamMember.HEARTRATE_HIGH);
+        josh.setSoundLevel(TeamMember.SOUNDLEVEL_MEDIUM);
         TeamMember jay = new TeamMember("Jay Whatthehellarewedoing", 4);
         jay.setHeartrate(TeamMember.HEARTRATE_NORMAL);
+        jay.setSoundLevel(TeamMember.SOUNDLEVEL_MIN);
         TeamMember judy = new TeamMember("Judy Wherearewegoing", 1);
+        judy.setSoundLevel(TeamMember.SOUNDLEVEL_LOW);
 
         ArrayList<TeamMember> team = new ArrayList<TeamMember>();
         team.add(jim);
@@ -96,9 +101,9 @@ public class Main {
             for (TeamMember member : teamTrios[j])
             {
                 if(member == null){break;}
-                //^ foreach runs through every slot in the array, regardless of whether or not any slots are null.
-                //^ This if statement catches the last trio when the last trio is not a complete trio of team member,
-                //^ e.g. 7 team members total would leave 2 complete trios and 1 trio of 1 team member.
+                // ^ foreach runs through every slot in the array, regardless of whether or not any slots are null.
+                // ^ This if statement catches the last trio when the last trio is not a complete trio of team member,
+                // ^ e.g. 7 team members total would leave 2 complete trios and 1 trio of 1 team member.
                 String[] readout = member.getReadout();
                 output[0] += "\t" + readout[0];
                 output[1] += "\t" + readout[1];

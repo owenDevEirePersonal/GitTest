@@ -32,7 +32,15 @@ public class TeamMember
     protected final static int WEAPON_CARBINE_MAXAMMO = 8;
     protected final static int WEAPON_SHOTGUN_MAXAMMO = 6;
 
+    protected final static int SOUNDLEVEL_MAX = 5;
+    protected final static int SOUNDLEVEL_HIGH = 4;
+    protected final static int SOUNDLEVEL_MEDIUM = 3;
+    protected final static int SOUNDLEVEL_LOW = 2;
+    protected final static int SOUNDLEVEL_MIN = 1;
+
+
     //[Constructors]
+
     public TeamMember(String inName, int inId)
     {
         id = inId;
@@ -81,6 +89,7 @@ public class TeamMember
         }
         nextOrder = inNextOrder;
     }
+
     //[/Constructors]
 
     public String[] getReadout()
@@ -178,6 +187,67 @@ public class TeamMember
 
         //[/BPM Display Modifier]
 
+        //[Volume Display Modifier]
+
+        switch(soundLevel)
+        {
+            case SOUNDLEVEL_MIN:
+
+                readoutLines[1] = readoutLines[1].replace("|               |", "|               |");
+                readoutLines[2] = readoutLines[2].replace("|               |", "|               |");
+                readoutLines[3] = readoutLines[3].replace("|               |", "|               |");
+                readoutLines[4] = readoutLines[4].replace("|  ___          |", "|  ___          |");
+                readoutLines[5] = readoutLines[5].replace("| |___|___ ___  |", "| |___|___ ___  |");
+                readoutLines[6] = readoutLines[6].replace("|_|___|___|___|_|", "|_|___|___|___|_|");
+
+                break;
+
+            case SOUNDLEVEL_LOW:
+
+                readoutLines[1] = readoutLines[1].replace("|               |", "|               |");
+                readoutLines[2] = readoutLines[2].replace("|               |", "|               |");
+                readoutLines[3] = readoutLines[3].replace("|               |", "|          ___  |");
+                readoutLines[4] = readoutLines[4].replace("|  ___          |", "|      ___|___| |");
+                readoutLines[5] = readoutLines[5].replace("| |___|___ ___  |", "|  ___|___|___| |");
+                readoutLines[6] = readoutLines[6].replace("|_|___|___|___|_|", "|_|___|___|___|_|");
+
+                break;
+
+            case SOUNDLEVEL_MEDIUM:
+
+                readoutLines[1] = readoutLines[1].replace("|               |", "|               |");
+                readoutLines[2] = readoutLines[2].replace("|               |", "|  ___          |");
+                readoutLines[3] = readoutLines[3].replace("|               |", "| |___|___      |");
+                readoutLines[4] = readoutLines[4].replace("|  ___          |", "| |___|___|___  |");
+                readoutLines[5] = readoutLines[5].replace("| |___|___ ___  |", "| |___|___|___| |");
+                readoutLines[6] = readoutLines[6].replace("|_|___|___|___|_|", "|_|___|___|___|_|");
+
+                break;
+
+            case SOUNDLEVEL_HIGH:
+
+                readoutLines[1] = readoutLines[1].replace("|               |", "|      ___|___| |");
+                readoutLines[2] = readoutLines[2].replace("|               |", "|  ___|___|___| |");
+                readoutLines[3] = readoutLines[3].replace("|               |", "| |___|___|___| |");
+                readoutLines[4] = readoutLines[4].replace("|  ___          |", "| |___|___|___| |");
+                readoutLines[5] = readoutLines[5].replace("| |___|___ ___  |", "| |___|___|___| |");
+                readoutLines[6] = readoutLines[6].replace("|_|___|___|___|_|", "|_|___|___|___|_|");
+
+                break;
+
+            case SOUNDLEVEL_MAX:
+
+                readoutLines[1] = readoutLines[1].replace("|               |", "| |___|___|___| |");
+                readoutLines[2] = readoutLines[2].replace("|               |", "| |___|___|___| |");
+                readoutLines[3] = readoutLines[3].replace("|               |", "| |___|___|___| |");
+                readoutLines[4] = readoutLines[4].replace("|  ___          |", "| |___|___|___| |");
+                readoutLines[5] = readoutLines[5].replace("| |___|___ ___  |", "| |___|___|___| |");
+                readoutLines[6] = readoutLines[6].replace("|_|___|___|___|_|", "|_|___|___|___|_|");
+
+                break;
+        }
+
+        //[/Volume Display Modifier]
 
         return readoutLines;
     }
