@@ -18,19 +18,21 @@ public class Main {
         printMenu();
         System.out.println("Loading...");
         TeamMember jim = new TeamMember("Jim Whatshisname", 1);
+        jim.setHeartrate(TeamMember.HEARTRATE_SUPERHIGH);
         TeamMember joe = new TeamMember("Joe PleaseDon'tDieHere", 2);
-        printSingleReadout(jim.getReadout());
-        printSingleReadout(joe.getReadout());
+        joe.setHeartrate(TeamMember.HEARTRATE_NONE);
+        TeamMember josh = new TeamMember("Josh Whatshisname", 3);
+        josh.setHeartrate(TeamMember.HEARTRATE_HIGH);
+        TeamMember jay = new TeamMember("Jay Whatthehellarewedoing", 4);
+        jay.setHeartrate(TeamMember.HEARTRATE_NORMAL);
+        TeamMember judy = new TeamMember("Judy Wherearewegoing", 1);
 
         ArrayList<TeamMember> team = new ArrayList<TeamMember>();
         team.add(jim);
         team.add(joe);
-        team.add(jim);
-        team.add(jim);
-        team.add(jim);
-        team.add(jim);
-        team.add(joe);
-        team.add(joe);
+        team.add(josh);
+        team.add(jay);
+        team.add(judy);
         printAllReadouts(team);
 
     }

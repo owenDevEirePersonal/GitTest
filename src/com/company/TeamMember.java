@@ -93,7 +93,7 @@ public class TeamMember
         readoutLines[2] = "|               /|         | |               |";
         readoutLines[3] = "|    /|        / |        /| |               |";
         readoutLines[4] = "|   / |       /  |       / | |  ___          |";
-        readoutLines[5] = "|__/  |______/   | _____/  | | |___|___ ___  |";
+        readoutLines[5] = "|__/  |______/   | _____/  | | |___|___ ___  |";//bpm counter = [1] to [26], volume meter = [31] to [45]
         readoutLines[6] = "| Bpm            |/        | |_|___|___|___|_|";
         readoutLines[7] = "|__________________________|_|_______________|";
         readoutLines[8] = "| placeholderName                            |"; //43 characters
@@ -106,6 +106,78 @@ public class TeamMember
             readoutLines[8] += " ";
         }
         readoutLines[8] += "|";
+
+
+        //[BPM Display Modifier]
+
+        /* Normal
+          "|                          |
+          "|               /|         |
+          "|    /|        / |        /|
+          "|   / |       /  |       / |
+          "|__/  |______/   | _____/  |
+          "| Bpm            |/        |
+
+          High
+          "|             /|        /| |
+          "|     /|     / |       / | |
+          "|    / |    /  |      /  | |
+          "|___/  | __/   |   __/   | |
+          "|      |/      | _/      | |
+          "| Bpm          |/        |/|
+
+          Super High
+          "|   /|    /|    |          |
+          "|  / |   / |   /|    /|    |
+          "| /  |  /  |  | |   / |   /|
+          "|/   | /   | /  |  /  |  / |
+          "|    |/    ||   | /   | /  |
+          "| Bpm      |/   |/    |/   |
+
+          None
+          "|                          |
+          "|                          |
+          "|                          |
+          "|                          |
+          "|_______________________/\_|
+          "| Bpm                      |
+
+         */
+
+        if(heartrate >= HEARTRATE_SUPERHIGH)
+        {
+            readoutLines[1] = readoutLines[1].replace("|                          ", "|   /|    /|    |          ");
+            readoutLines[2] = readoutLines[2].replace("|               /|         ", "|  / |   / |   /|    /|    ");
+            readoutLines[3] = readoutLines[3].replace("|    /|        / |        /", "| /  |  /  |  | |   / |   /");
+            readoutLines[4] = readoutLines[4].replace("|   / |       /  |       / ", "|/   | /   | /  |  /  |  / ");
+            readoutLines[5] = readoutLines[5].replace("|__/  |______/   | _____/  ", "|    |/    ||   | /   | /  ");
+            readoutLines[6] = readoutLines[6].replace("| Bpm            |/        ", "| Bpm      |/   |/    |/   ");
+        }
+        else if(heartrate >= HEARTRATE_HIGH)
+        {
+            readoutLines[1] = readoutLines[1].replace("|                          ", "|             /|        /| ");
+            readoutLines[2] = readoutLines[2].replace("|               /|         ", "|     /|     / |       / | ");
+            readoutLines[3] = readoutLines[3].replace("|    /|        / |        /", "|    / |    /  |      /  | ");
+            readoutLines[4] = readoutLines[4].replace("|   / |       /  |       / ", "|___/  | __/   |   __/   | ");
+            readoutLines[5] = readoutLines[5].replace("|__/  |______/   | _____/  ", "|      |/      | _/      | ");
+            readoutLines[6] = readoutLines[6].replace("| Bpm            |/        ", "| Bpm          |/        |/");
+        }
+        else if(heartrate >= HEARTRATE_NORMAL)
+        {
+            //readout deaults to normal heartrate.
+        }
+        else if(heartrate <= HEARTRATE_NONE)
+        {
+            readoutLines[1] = readoutLines[1].replace("|                          ", "|                          ");
+            readoutLines[2] = readoutLines[2].replace("|               /|         ", "|                          ");
+            readoutLines[3] = readoutLines[3].replace("|    /|        / |        /", "|                          ");
+            readoutLines[4] = readoutLines[4].replace("|   / |       /  |       / ", "|                          ");
+            readoutLines[5] = readoutLines[5].replace("|__/  |______/   | _____/  ", "|_______________________/\\_");
+            readoutLines[6] = readoutLines[6].replace("| Bpm            |/        ", "| Bpm                      ");
+        }
+
+        //[/BPM Display Modifier]
+
 
         return readoutLines;
     }
