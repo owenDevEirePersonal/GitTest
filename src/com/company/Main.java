@@ -1,7 +1,10 @@
 package com.company;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+
+
 
     public static void main(String[] args)
     {
@@ -15,8 +18,20 @@ public class Main {
         printMenu();
         System.out.println("Loading...");
         TeamMember jim = new TeamMember("Jim Whatshisname", 1);
-        printReadout(jim.getReadout());
+        TeamMember joe = new TeamMember("Joe PleaseDon'tDieHere", 2);
+        printSingleReadout(jim.getReadout());
+        printSingleReadout(joe.getReadout());
 
+        ArrayList<TeamMember> team = new ArrayList<TeamMember>();
+        team.add(jim);
+        team.add(joe);
+        team.add(jim);
+        team.add(jim);
+        team.add(jim);
+        team.add(jim);
+        team.add(joe);
+        team.add(joe);
+        printAllReadouts(team);
 
     }
 
@@ -30,12 +45,78 @@ public class Main {
                          "|__|  |__| |______| |_|  |_| |_|  |_|     |_|     |_____/  |______| |_|  |_|     |_|     ");
     }
 
-    private static void printReadout(String[] in)
+    private static void printSingleReadout(String[] in)
     {
         for (String a: in)
         {
             System.out.println(a);
         }
+    }
+
+    private static void printAllReadouts(ArrayList<TeamMember> team)
+    {
+        int lines = (int) Math.ceil(((double) team.size()) / 3.0);
+        System.out.print(lines);
+
+        TeamMember[][] teamTrios= new TeamMember[lines][3];
+        int k = 0;
+        int currentTrio = 0;
+        for (TeamMember u:team)
+        {
+            teamTrios[currentTrio][k] = u;
+
+            k++;
+            if(k%3 == 0)
+            {
+                k = 0;
+                currentTrio++;
+            }
+        }
+
+
+
+
+
+        for(int j = 0; j < lines; j++)
+        {
+            String[] output = new String[10];
+            output[0] = "";
+            output[1] = "";
+            output[2] = "";
+            output[3] = "";
+            output[4] = "";
+            output[5] = "";
+            output[6] = "";
+            output[7] = "";
+            output[8] = "";
+            output[9] = "";
+
+            for (TeamMember member : teamTrios[j])
+            {
+                if(member == null){break;}
+                //^ foreach runs through every slot in the array, regardless of whether or not any slots are null.
+                //^ This if statement catches the last trio when the last trio is not a complete trio of team member,
+                //^ e.g. 7 team members total would leave 2 complete trios and 1 trio of 1 team member.
+                String[] readout = member.getReadout();
+                output[0] += "\t" + readout[0];
+                output[1] += "\t" + readout[1];
+                output[2] += "\t" + readout[2];
+                output[3] += "\t" + readout[3];
+                output[4] += "\t" + readout[4];
+                output[5] += "\t" + readout[5];
+                output[6] += "\t" + readout[6];
+                output[7] += "\t" + readout[7];
+                output[8] += "\t" + readout[8];
+                output[9] += "\t" + readout[9];
+
+            }
+
+            for (String a: output)
+            {
+                System.out.println(a);
+            }
+        }
+
     }
 
     private static void printMenu()

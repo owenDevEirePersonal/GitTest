@@ -96,8 +96,16 @@ public class TeamMember
         readoutLines[5] = "|__/  |______/   | _____/  | | |___|___ ___  |";
         readoutLines[6] = "| Bpm            |/        | |_|___|___|___|_|";
         readoutLines[7] = "|__________________________|_|_______________|";
-        readoutLines[8] = "| placeholderName                            |";
+        readoutLines[8] = "| placeholderName                            |"; //43 characters
         readoutLines[9] = "|____________________________________________|";
+
+
+        readoutLines[8] = "| " + name;
+        for(int i = name.length(); i < 43; i++)
+        {
+            readoutLines[8] += " ";
+        }
+        readoutLines[8] += "|";
 
         return readoutLines;
     }
