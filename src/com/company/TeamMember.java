@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+
 /**
  * Created by owenryan on 21/03/2017.
  */
@@ -7,6 +9,7 @@ public class TeamMember
 {
     private int id;
     private String name;
+    private int position;
     private int health;
     private int heartrate;
     private int soundLevel;
@@ -41,10 +44,11 @@ public class TeamMember
 
     //[Constructors]
 
-    public TeamMember(String inName, int inId)
+    public TeamMember(String inName, int inId, int inPosition)
     {
         id = inId;
         name = inName;
+        position = inPosition;
         health = 3;
         heartrate = HEARTRATE_NORMAL;
         soundLevel = 0;
@@ -54,10 +58,11 @@ public class TeamMember
         nextOrder = "HOLD POSITION";
     }
 
-    public TeamMember(String inName, int inId, int weaponIn)
+    public TeamMember(String inName, int inId, int inPosition, int weaponIn)
     {
         id = inId;
         name = inName;
+        position = inPosition;
         health = 3;
         heartrate = HEARTRATE_NORMAL;
         soundLevel = 0;
@@ -72,10 +77,11 @@ public class TeamMember
         nextOrder = "HOLD POSITION";
     }
 
-    public TeamMember(String inName, int inId, int inHealth, int inHeartrate, int inSoundLevel, int inFireMode, int weaponIn, String inNextOrder)
+    public TeamMember(String inName, int inId, int inPosition, int inHealth, int inHeartrate, int inSoundLevel, int inFireMode, int weaponIn, String inNextOrder)
     {
         id = inId;
         name = inName;
+        position = inPosition;
         health = inHealth;
         heartrate = inHeartrate;
         soundLevel = inSoundLevel;
@@ -87,7 +93,7 @@ public class TeamMember
             case WEAPON_RIFLE: weapon = WEAPON_RIFLE; ammo = WEAPON_RIFLE_MAXAMMO; break;
             default: System.out.println("ERROR: unable to create TeamMember " + inName + " with ID: " + inId + " . Reason: Invalid Weapon."); break;
         }
-        nextOrder = inNextOrder;
+        setNextOrder(inNextOrder);
     }
 
     //[/Constructors]
@@ -252,6 +258,11 @@ public class TeamMember
         return readoutLines;
     }
 
+    public void printRadio()
+    {
+        //TODO: Add radio feedback based on current stage of the game.
+        System.out.print(name + ":  "  + ".....Placeholder Radio message..."+ "over.\n");
+    }
 
     //[Getters and Setters]
     public int getId()
@@ -356,7 +367,7 @@ public class TeamMember
 
     public void setNextOrder(String newOrder)
     {
-        if(newOrder.matches("HOLD POSITION")
+        if(newOrder.toUpperCase().matches("HOLD POSITION")
                 || newOrder.matches("HOLD FIRE")
                 || newOrder.matches("ADVANCE")
                 || newOrder.matches("RETREAT")
@@ -380,8 +391,27 @@ public class TeamMember
         else
         {
             System.out.println("ERROR: Unable to issue order to team member " + name + ", " + newOrder + " does not match any known order.");
+            if(nextOrder == null) { System.out.println("Defaulting to \"HOLD POSITION\""); nextOrder = "HOLD POSITION";}
         }
     }
+
+    public int getPosition()
+    {
+        return position;
+    }
+
+    public void setPosition(int newPosition)
+    {
+        position = newPosition;
+    }
+
+    public void swapPositions(TeamMember memberToSwapWith)
+    {
+        int temp = this.position;
+        this.position = memberToSwapWith.getPosition();
+        memberToSwapWith.setPosition(temp);
+    }
+
     //[/Getters and Setters]
 
 

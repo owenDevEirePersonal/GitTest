@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class Main {
 
-
+    private static ArrayList<TeamMember> team;
 
     public static void main(String[] args)
     {
+        team = new ArrayList<TeamMember>();
         Scanner input = new Scanner(System.in);
 
 	    System.out.println("This better work.");
@@ -15,30 +16,33 @@ public class Main {
 	    printLogo();
 	    System.out.println("\n\n\t\t\t\t Press Enter to Start");
 	    input.nextLine();
-        printMenu();
+        printMainMenu();
         System.out.println("Loading...");
-        TeamMember jim = new TeamMember("Jim Whatshisname", 1);
+        TeamMember jim = new TeamMember("Jim Whatshisname", 1, 1);
         jim.setHeartrate(TeamMember.HEARTRATE_SUPERHIGH);
         jim.setSoundLevel(TeamMember.SOUNDLEVEL_HIGH);
-        TeamMember joe = new TeamMember("Joe PleaseDon'tDieHere", 2);
+        TeamMember joe = new TeamMember("Joe PleaseDon'tDieHere", 2, 2);
         joe.setHeartrate(TeamMember.HEARTRATE_NONE);
         joe.setSoundLevel(TeamMember.SOUNDLEVEL_MAX);
-        TeamMember josh = new TeamMember("Josh Whatshisname", 3);
+        TeamMember josh = new TeamMember("Josh Whatshisname", 3, 3);
         josh.setHeartrate(TeamMember.HEARTRATE_HIGH);
         josh.setSoundLevel(TeamMember.SOUNDLEVEL_MEDIUM);
-        TeamMember jay = new TeamMember("Jay Whatthehellarewedoing", 4);
+        TeamMember jay = new TeamMember("Jay Whatthehellarewedoing", 4, 4);
         jay.setHeartrate(TeamMember.HEARTRATE_NORMAL);
         jay.setSoundLevel(TeamMember.SOUNDLEVEL_MIN);
-        TeamMember judy = new TeamMember("Judy Wherearewegoing", 1);
+        TeamMember judy = new TeamMember("Judy Wherearewegoing", 5, 5);
         judy.setSoundLevel(TeamMember.SOUNDLEVEL_LOW);
 
-        ArrayList<TeamMember> team = new ArrayList<TeamMember>();
         team.add(jim);
         team.add(joe);
         team.add(josh);
         team.add(jay);
         team.add(judy);
         printAllReadouts(team);
+        printRadioMessages(team);
+        printMenu();
+
+        input.close();
 
     }
 
@@ -126,8 +130,36 @@ public class Main {
 
     }
 
-    private static void printMenu()
+    private static void printMainMenu()
     {
         System.out.println("__________\n\n" + "MainMenu\n" + "__________");
+    }
+
+    private static void printRadioMessages(ArrayList<TeamMember> team)
+    {
+        System.out.println(" _________________________________________________ ");
+        System.out.println("|  ");
+        for (TeamMember aMember:team)
+        {
+            System.out.print("|  ");
+            aMember.printRadio();
+            System.out.println("|  ");
+        }
+        System.out.println("|_________________________________________________ ");
+    }
+
+    private static void printMenu()
+    {
+        System.out.println("1. \t ");
+    }
+
+    private static void shiftTeamMemberToBack(TeamMember memberToMove)
+    {
+        //TODO: move team member to back logic
+    }
+
+    private static void shiftTeamMemberToFront(TeamMember memberToMove)
+    {
+        //TODO: move team member to front logic
     }
 }
