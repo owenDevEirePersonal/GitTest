@@ -9,9 +9,9 @@ public class Threat
     private int targetIndex;
     private boolean isInSight;
 
-    public Threat(int distanceToTarget)
+    public Threat(int distanceToTargetin)
     {
-        distanceToTarget = distanceToTarget;
+        distanceToTarget = distanceToTargetin;
         targetIndex = 0; //the front of the group
         isInSight = true;
     }

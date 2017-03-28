@@ -1,4 +1,5 @@
 package com.company;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,6 +43,46 @@ public class Main {
         printRadioMessages(team);
         printMenu();
 
+        while(true)
+        {
+            boolean endProgram = false;
+            for (TeamMember currentMember: team)
+            {
+                System.out.println(currentMember.getName() + " ready for orders: ");
+                String in = (input.nextLine()).toUpperCase();
+                switch(in)
+                {
+                    case "MOVE TO FRONT": currentMember.setNextOrder("MOVE TO FRONT"); shiftTeamMemberToFront(currentMember); break;
+                    case "MOVE TO BACK": currentMember.setNextOrder("MOVE TO BACK"); shiftTeamMemberToBack(currentMember); break;
+                    case "CHECK POSITIONING": currentMember.setNextOrder("CHECK POSITIONING"); printPositions(); break;
+                    case "QUIT": endProgram = true;
+                    default: System.out.println("Unknown command"); break;
+                }
+            }
+            if(endProgram) {System.out.println("Ending Program, Goodbye"); break;}
+
+
+            System.out.println("_______________NEXT ORDERS_______________");
+            for (TeamMember currentMember: team)
+            {
+               System.out.println(currentMember.getName() + " : " + currentMember.getNextOrder());
+            }
+            System.out.println("Issue all commands? Y/N");
+            String in = input.nextLine().toUpperCase();
+            if(in.matches("QUIT"))
+            {
+                break;
+            }
+            else if(in.matches("Y"))
+            {
+                //TODO: ADD NEXT TURN LOGIC
+            }
+            else
+            {
+                //nothing, the current turn will loop.
+            }
+        }
+
         input.close();
 
     }
@@ -83,10 +124,6 @@ public class Main {
                 currentTrio++;
             }
         }
-
-
-
-
 
         for(int j = 0; j < lines; j++)
         {
@@ -153,13 +190,45 @@ public class Main {
         System.out.println("1. \t ");
     }
 
+    private static void printPositions()
+    {
+        for (TeamMember aMember: team)
+        {
+            System.out.println(aMember.getName() + "'s position = " + aMember.getPosition());
+        }
+    }
+
     private static void shiftTeamMemberToBack(TeamMember memberToMove)
     {
+        int posOfMovee = memberToMove.getPosition();
+        for (TeamMember aMember: team)
+        {
+            if(aMember.getPosition() > posOfMovee)
+            {
+                aMember.setPosition(aMember.getPosition() - 1);
+            }
+            else if (aMember.getPosition() == posOfMovee)
+            {
+                aMember.setPosition(team.size());
+            }
+        }
         //TODO: move team member to back logic
     }
 
     private static void shiftTeamMemberToFront(TeamMember memberToMove)
     {
+        int posOfMovee = memberToMove.getPosition();
+        for (TeamMember aMember: team)
+        {
+            if(aMember.getPosition() < posOfMovee)
+            {
+                aMember.setPosition(aMember.getPosition() + 1);
+            }
+            else if (aMember.getPosition() == posOfMovee)
+            {
+                aMember.setPosition(1);
+            }
+        }
         //TODO: move team member to front logic
     }
 }
